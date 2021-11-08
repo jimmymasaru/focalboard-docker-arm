@@ -48,8 +48,8 @@ jobs:
           username: ${{ secrets.DOCKERHUB_USERNAME }}
           password: ${{ secrets.DOCKERHUB_TOKEN }}
 
-      - name: Build and push
-        id: docker_build
+      - name: Build and push stable release
+        if: ${{ !contains(github.event.inputs.release_tag, '-rc') }}
         uses: docker/build-push-action@v2
         with:
           platforms: linux/arm/v7,linux/arm64
@@ -57,4 +57,14 @@ jobs:
           build-args: FOCALBOARD_TAG=${{ github.event.inputs.release_tag }}
           tags: |
             ${{ env.DOCKERHUB_REPO }}:latest
+            ${{ env.DOCKERHUB_REPO }}:${{ steps.get-release-tag.outputs.result }}
+
+      - name: Build and push non-stable release
+        if: ${{ contains(github.event.inputs.release_tag, '-rc') }}
+        uses: docker/build-push-action@v2
+        with:
+          platforms: linux/arm/v7,linux/arm64
+          push: true
+          build-args: FOCALBOARD_TAG=${{ github.event.inputs.release_tag }}
+          tags: |
             ${{ env.DOCKERHUB_REPO }}:${{ steps.get-release-tag.outputs.result }}
