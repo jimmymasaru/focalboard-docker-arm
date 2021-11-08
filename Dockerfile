@@ -14,7 +14,7 @@ RUN npm run pack
 
 # build the backend
 FROM golang:1.17.2 AS backend
-ARG TARGETARCH=arm
+ARG TARGETARCH
 WORKDIR /focalboard
 COPY --from=repo /focalboard .
 RUN sed -i "s/GOARCH=amd64/GOARCH=${TARGETARCH}/g" Makefile

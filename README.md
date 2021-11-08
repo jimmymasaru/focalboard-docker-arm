@@ -1,7 +1,8 @@
-[Focalboard](https://www.focalboard.com) Docker Images for Raspberry Pi
+[Focalboard](https://www.focalboard.com) Docker Images for Raspberry Pi (arm/v7, arm64)
 ====================
 
 The images can be found at Docker Hub [`jimmymasaru/focalboard`](https://hub.docker.com/r/jimmymasaru/focalboard).
+Source code can be found at GitHub [`jimmymasaru/focalboard-docker-arm`](https://github.com/jimmymasaru/focalboard-docker-arm/).
 
 Usage
 -----
